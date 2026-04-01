@@ -26,13 +26,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const PORT = process.env.PORT || 3000;
-// Connect to MongoDB first, then start server
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-  });
-});
+const PORT = process.env.PORT || 9000;
+
+// Connect to MongoDB
+connectDB();
 
 app.get("/", (req, res) => {
   res.send("Welcome to the ShopNex");
@@ -56,3 +53,13 @@ app.use("/api/admin/users", adminRoutes);
 app.use("/api/admin/products", productAdminRoutes);
 app.use("/api/admin/orders", adminOrderRoutes);
 app.use("/api/admin/dashboard", dashboardRoutes);
+
+// Only listen if not in production (for local development)
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+}
+
+// Export for Vercel
+module.exports = app;

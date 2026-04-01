@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import UserLayout from "./Components/Layout/userlayout";
+import UserLayout from "./Components/Layout/Userlayout";
 import Home from "./Components/pages/Home";
 import { Toaster } from "sonner";
 import Login from "./Components/pages/Login";

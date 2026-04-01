@@ -4,7 +4,7 @@ import Mancollection from "../Products/Mancollection";
 import Newarrival from "../Products/Newarrival";
 import Productgrid from "../Products/Productgrid";
 import FeaturedCollection from "../Products/FeaturedCollection";
-import Featuresection from "../Products/Featuresection";
+import FeatureSection from "../Products/FeatureSection";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -60,7 +60,7 @@ const Home = () => {
         <Productgrid products={products} loading={loading} error={error} />
       </div>
       <FeaturedCollection />
-      <Featuresection />
+      <FeatureSection />
     </>
   );
 };
