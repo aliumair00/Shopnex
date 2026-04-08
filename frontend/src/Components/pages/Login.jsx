@@ -8,7 +8,6 @@ import { mergeCart } from "../../redux/slice/cartSlice";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const { Loading, error } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
@@ -39,17 +38,16 @@ const Login = () => {
     if (user && token) {
       if (cart?.products.length > 0 && guestId) {
         dispatch(mergeCart({ guestId, user })).then(() => {
-          navigate(isCheckoutRedirect ? "/checkout" : "/");
+          navigate(isCheckoutRedirect ? "/checkout" : user?.role === "admin" ? "/admin" : "/");
         });
       } else {
-        navigate(isCheckoutRedirect ? "/checkout" : "/");
+        navigate(isCheckoutRedirect ? "/checkout" : user?.role === "admin" ? "/admin" : "/");
       }
     }
   }, [user, cart, guestId, navigate, isCheckoutRedirect, dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
     console.log('Login - Submitting with:', { email });
     dispatch(loginUser({ email, password }))
       .then((result) => {

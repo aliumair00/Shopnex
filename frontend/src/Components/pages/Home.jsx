@@ -10,11 +10,20 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { fetchProductsByFilters } from "../../redux/slice/productSlice";
 import Productdetail from "../Products/Productdetail";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.product);
   const [bestSellerProduct, setBestSellerProduct] = useState(null);
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user?.role === "admin") {
+      navigate("/admin");
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     //fetch products for specific collection

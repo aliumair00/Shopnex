@@ -12,7 +12,7 @@ const AdminSidebar = ({ closeSidebar }) => {
         console.log('AdminSidebar - After logout, userInfo:', localStorage.getItem("userInfo"));
         console.log('AdminSidebar - After logout, userToken:', localStorage.getItem("userToken"));
         if (closeSidebar) closeSidebar();
-        navigate('/');
+        navigate('/login');
     }
   return (
     <div className="flex flex-col h-full">
